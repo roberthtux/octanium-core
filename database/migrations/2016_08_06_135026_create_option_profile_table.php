@@ -12,12 +12,12 @@ class CreateProfileOptionTable extends Migration
      */
     public function up()
     {
-        Schema::create('profile_option', function (Blueprint $table) {
+        Schema::create('option_profile', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('profile_id')->unsigned();
-            $table->foreign('profile_id')->references('id')->on('profiles');
             $table->integer('option_id')->unsigned();
             $table->foreign('option_id')->references('id')->on('options');
+            $table->integer('profile_id')->unsigned();
+            $table->foreign('profile_id')->references('id')->on('profiles');
         });
     }
 
