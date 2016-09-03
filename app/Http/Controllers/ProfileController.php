@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Models\Profile;
-
+use App\Models\Option;
+use Illuminate\Support\Facades\DB;
 class ProfileController extends Controller
 {
     public function getProfile(Request $request)
@@ -20,9 +21,23 @@ class ProfileController extends Controller
             ->with('user')
             ->with('profile')
             ->get();*/
-        $profile =User::find($request->route('user_id'))->Profile->lists('name');
+
+        //$profile =User::find($request->route('user_id'))->Profile->lists('name');
+
+       $profile =User::find($request->route('user_id'))->profile()->lists('profile_id');
+        //$option=Profile::all()->first()->Option->lists('name'); //option()->get();
+
+       $option = Option::whereHas('profile', function($query) use ($profile) {
+            $query->whereIn('profile_id', $profile);
+        })->get();
+
+/*        $option = Option::select(DB::raw('Options.*'))
+            ->join('Option_profile', 'option_profile.option_id', '=', 'options.id')
+            ->whereIn('profile_id', 1)
+            ->get();*/
+
         return Response()
-            ->json($profile);
+            ->json($option);
     }
 
 }

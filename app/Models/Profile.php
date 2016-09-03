@@ -8,7 +8,7 @@ class Profile extends Model
 {
 	public function option()
     {
-        return $this->HasMany('App\Models\Option');
+        return $this->belongsToMany('App\Models\Option');
     }
     public function user()
     {
