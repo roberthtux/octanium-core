@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProfileOptionTable extends Migration
+class CreateOptionProfileTable extends Migration
 {
     /**
      * Run the migrations.
@@ -28,6 +28,6 @@ class CreateProfileOptionTable extends Migration
      */
     public function down()
     {
-        Schema::drop('profile_option');
+        Schema::drop('option_profile');
     }
 }
